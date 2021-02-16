@@ -28,7 +28,7 @@ final class ImageCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .red
+        backgroundColor = .lightGray
         setupLayout()
     }
     

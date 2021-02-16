@@ -17,6 +17,7 @@
 		94ED6C4A25DC2DCA0035F042 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ED6C4925DC2DCA0035F042 /* ImageCell.swift */; };
 		94ED6C4E25DC2FC10035F042 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ED6C4D25DC2FC10035F042 /* Item.swift */; };
 		94ED6C5125DC30B30035F042 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ED6C5025DC30B30035F042 /* NSObject+Extension.swift */; };
+		94ED6C5425DC35AE0035F042 /* PagedFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ED6C5325DC35AE0035F042 /* PagedFlowLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		94ED6C4925DC2DCA0035F042 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		94ED6C4D25DC2FC10035F042 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		94ED6C5025DC30B30035F042 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		94ED6C5325DC35AE0035F042 /* PagedFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedFlowLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			children = (
 				94EAF38625DC1C1800D5207B /* MainViewController.swift */,
 				94ED6C4925DC2DCA0035F042 /* ImageCell.swift */,
+				94ED6C5325DC35AE0035F042 /* PagedFlowLayout.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 			files = (
 				94ED6C4E25DC2FC10035F042 /* Item.swift in Sources */,
 				94EAF38725DC1C1800D5207B /* MainViewController.swift in Sources */,
+				94ED6C5425DC35AE0035F042 /* PagedFlowLayout.swift in Sources */,
 				94ED6C4A25DC2DCA0035F042 /* ImageCell.swift in Sources */,
 				94EAF38325DC1C1800D5207B /* AppDelegate.swift in Sources */,
 				94EAF38525DC1C1800D5207B /* SceneDelegate.swift in Sources */,
