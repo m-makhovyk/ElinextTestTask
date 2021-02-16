@@ -14,6 +14,9 @@
 		94EAF38F25DC1C1900D5207B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94EAF38D25DC1C1900D5207B /* LaunchScreen.storyboard */; };
 		94EAF39D25DC2B3E00D5207B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 94EAF39C25DC2B3E00D5207B /* SnapKit */; };
 		94EAF3A125DC2B6D00D5207B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 94EAF3A025DC2B6D00D5207B /* Kingfisher */; };
+		94ED6C4A25DC2DCA0035F042 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ED6C4925DC2DCA0035F042 /* ImageCell.swift */; };
+		94ED6C4E25DC2FC10035F042 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ED6C4D25DC2FC10035F042 /* Item.swift */; };
+		94ED6C5125DC30B30035F042 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ED6C5025DC30B30035F042 /* NSObject+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		94EAF38B25DC1C1900D5207B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94EAF38E25DC1C1900D5207B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		94EAF39025DC1C1900D5207B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94ED6C4925DC2DCA0035F042 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		94ED6C4D25DC2FC10035F042 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		94ED6C5025DC30B30035F042 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,14 +64,49 @@
 		94EAF38125DC1C1800D5207B /* ElinextSpringBoard */ = {
 			isa = PBXGroup;
 			children = (
-				94EAF38225DC1C1800D5207B /* AppDelegate.swift */,
-				94EAF38425DC1C1800D5207B /* SceneDelegate.swift */,
-				94EAF38625DC1C1800D5207B /* MainViewController.swift */,
-				94EAF38B25DC1C1900D5207B /* Assets.xcassets */,
-				94EAF38D25DC1C1900D5207B /* LaunchScreen.storyboard */,
-				94EAF39025DC1C1900D5207B /* Info.plist */,
+				94ED6C4C25DC2FAB0035F042 /* Model */,
+				94EAF3A525DC2D4200D5207B /* MainScreen */,
+				94EAF3A325DC2D0F00D5207B /* App */,
+				94EAF3A425DC2D1D00D5207B /* Resources */,
 			);
 			path = ElinextSpringBoard;
+			sourceTree = "<group>";
+		};
+		94EAF3A325DC2D0F00D5207B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				94EAF38225DC1C1800D5207B /* AppDelegate.swift */,
+				94EAF38425DC1C1800D5207B /* SceneDelegate.swift */,
+				94EAF39025DC1C1900D5207B /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		94EAF3A425DC2D1D00D5207B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				94EAF38B25DC1C1900D5207B /* Assets.xcassets */,
+				94EAF38D25DC1C1900D5207B /* LaunchScreen.storyboard */,
+				94ED6C5025DC30B30035F042 /* NSObject+Extension.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		94EAF3A525DC2D4200D5207B /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				94EAF38625DC1C1800D5207B /* MainViewController.swift */,
+				94ED6C4925DC2DCA0035F042 /* ImageCell.swift */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		94ED6C4C25DC2FAB0035F042 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				94ED6C4D25DC2FC10035F042 /* Item.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,9 +186,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94ED6C4E25DC2FC10035F042 /* Item.swift in Sources */,
 				94EAF38725DC1C1800D5207B /* MainViewController.swift in Sources */,
+				94ED6C4A25DC2DCA0035F042 /* ImageCell.swift in Sources */,
 				94EAF38325DC1C1800D5207B /* AppDelegate.swift in Sources */,
 				94EAF38525DC1C1800D5207B /* SceneDelegate.swift in Sources */,
+				94ED6C5125DC30B30035F042 /* NSObject+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +332,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 37D9383K7L;
-				INFOPLIST_FILE = ElinextSpringBoard/Info.plist;
+				INFOPLIST_FILE = ElinextSpringBoard/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -308,7 +352,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 37D9383K7L;
-				INFOPLIST_FILE = ElinextSpringBoard/Info.plist;
+				INFOPLIST_FILE = ElinextSpringBoard/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
