@@ -75,13 +75,15 @@ extension MainViewController {
         let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(onAddTapped))
         navigationItem.rightBarButtonItem = addButton
         
-        let reloadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.clockwise"), style: .plain, target: self, action: #selector(onReloadTapped))
+        let reloadButton = UIBarButtonItem(title: "Reload All", style: .plain, target: self, action: #selector(onReloadTapped))
         navigationItem.leftBarButtonItem = reloadButton
     }
     
     @objc private func onAddTapped() {
         items.append(generateRandomItem())
-        collectionView.reloadData()
+        let indexPath = IndexPath(item: items.count - 1, section: 0)
+        collectionView.insertItems(at: [indexPath])
+        scrollToLastPageIfNeeded(addedIndexPath: indexPath)
     }
     
     @objc private func onReloadTapped() {
@@ -90,6 +92,7 @@ extension MainViewController {
             items.append(generateRandomItem())
         }
         collectionView.reloadData()
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: false)
     }
     
     private func generateRandomItem() -> Item {
@@ -107,6 +110,23 @@ extension MainViewController {
         let totalSpacing = CGFloat(numberOfItemsInColumn - 1) * itemSpacing
         let totalHeight = view.frame.height - view.safeAreaInsets.top - view.safeAreaInsets.bottom - totalSpacing
         return totalHeight / CGFloat(numberOfItemsInColumn)
+    }
+    
+    private func scrollToLastPageIfNeeded(addedIndexPath: IndexPath) {
+        if collectionView.indexPathsForVisibleItems.contains(addedIndexPath) {
+            return
+        }
+        
+        let offset = getLastPageOffset()
+        collectionView.setContentOffset(offset, animated: true)
+    }
+    
+    private func getLastPageOffset() -> CGPoint {
+        let itemsPerPage = numberOfItemsInRow * numberOfItemsInColumn
+        let page = floor(Double(items.count) / Double(itemsPerPage))
+        let pageWidth = view.bounds.width - itemSpacing * 2
+        let x = CGFloat(page) * pageWidth
+        return .init(x: x, y: 0)
     }
 }
 
