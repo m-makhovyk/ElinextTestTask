@@ -9,12 +9,15 @@ import UIKit
 
 final class PagedFlowLayout: UICollectionViewFlowLayout {
     
+    // MARK: - Private properties -
+    
     private let numberOfItemsInRow: Int
     private let numberOfItemsInColumn: Int
     
     private var cellCount = 0
     private var boundsSize = CGSize.zero
     
+    // MARK: - Lifecycle -
     
     init(_ numberOfItemsInRow: Int, _ numberOfItemsInColumn: Int) {
         self.numberOfItemsInRow = numberOfItemsInRow
@@ -67,27 +70,6 @@ final class PagedFlowLayout: UICollectionViewFlowLayout {
     public override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
-    
-    private func computeLayoutAttributesForCellAt(indexPath:IndexPath) -> UICollectionViewLayoutAttributes {
-        let row = indexPath.row
-        let bounds = self.collectionView!.bounds
-        
-        
-        let itemsPerPage = numberOfItemsInColumn * numberOfItemsInRow
-        
-        let columnPosition = row % numberOfItemsInRow
-        let rowPosition = (row / numberOfItemsInRow) % numberOfItemsInColumn
-        let itemPage = Int(floor(Double(row)/Double(itemsPerPage)))
-        
-        let attr = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-        
-        var frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-        frame.origin.x = CGFloat(itemPage) * bounds.size.width + CGFloat(columnPosition) * (itemSize.width + minimumInteritemSpacing)
-        frame.origin.y = CGFloat(rowPosition) * (itemSize.height + minimumLineSpacing)
-        frame.size = itemSize
-        attr.frame = frame
-        return attr
-    }
 
     override func targetContentOffset(
         forProposedContentOffset proposedContentOffset: CGPoint,
@@ -104,5 +86,30 @@ final class PagedFlowLayout: UICollectionViewFlowLayout {
         let newHorizontalOffset = (currentPage * pageWidth) - collectionView.contentInset.left
 
         return CGPoint(x: newHorizontalOffset, y: proposedContentOffset.y)
+    }
+}
+
+// MARK: - Private methods -
+
+extension PagedFlowLayout {
+    
+    private func computeLayoutAttributesForCellAt(indexPath:IndexPath) -> UICollectionViewLayoutAttributes {
+        let row = indexPath.row
+        let bounds = collectionView?.bounds ?? .zero
+        
+        let itemsPerPage = numberOfItemsInColumn * numberOfItemsInRow
+        
+        let columnPosition = row % numberOfItemsInRow
+        let rowPosition = (row / numberOfItemsInRow) % numberOfItemsInColumn
+        let itemPage = Int(floor(Double(row)/Double(itemsPerPage)))
+        
+        let attr = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+        
+        var frame = CGRect.zero
+        frame.origin.x = CGFloat(itemPage) * bounds.size.width + CGFloat(columnPosition) * (itemSize.width + minimumInteritemSpacing)
+        frame.origin.y = CGFloat(rowPosition) * (itemSize.height + minimumLineSpacing)
+        frame.size = itemSize
+        attr.frame = frame
+        return attr
     }
 }
