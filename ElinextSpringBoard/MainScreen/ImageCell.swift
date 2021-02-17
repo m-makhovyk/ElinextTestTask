@@ -28,7 +28,7 @@ final class ImageCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .lightGray
+        backgroundColor = .white
         setupLayout()
     }
     
@@ -48,5 +48,7 @@ extension ImageCell {
         }
         
         imageView.kf.indicatorType = .activity
+        imageView.layer.cornerRadius = 7
+        imageView.layer.masksToBounds = true
     }
 }
