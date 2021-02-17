@@ -16,7 +16,7 @@ final class MainViewController: UIViewController {
     private let numberOfItemsInColumn = 10
     private let itemSpacing: CGFloat = 2
     
-    private lazy var flowLayout = PagedFlowLayout(numberOfItemsInRow: numberOfItemsInRow)
+    private lazy var flowLayout = PagedFlowLayout(numberOfItemsInRow, numberOfItemsInColumn)
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     
     private var items = [Item]()
@@ -28,7 +28,13 @@ final class MainViewController: UIViewController {
         
         setupLayout()
         setupCollectionView()
-        generateItems()
+        setupNavigationItem()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        let width = calculateItemWidth()
+        let height = calculateItemHeight()
+        flowLayout.itemSize = .init(width: width, height: height)
     }
 }
 
@@ -49,10 +55,9 @@ extension MainViewController {
     
     private func setupCollectionView() {
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.className)
-        collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = .clear
         collectionView.decelerationRate = .fast
         
         flowLayout.scrollDirection = .horizontal
@@ -64,12 +69,44 @@ extension MainViewController {
         flowLayout.itemSize = .init(width: width, height: height)
     }
     
-    private func generateItems() {
-        for index in 1...350 {
-            let url = URL(string: "https://loremflickr.com/200/200?lock=\(index)")!
-            items.append(Item(imageUrl: url))
+    private func setupNavigationItem() {
+        navigationItem.title = "SpringBoard"
+        
+        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(onAddTapped))
+        navigationItem.rightBarButtonItem = addButton
+        
+        let reloadButton = UIBarButtonItem(image: UIImage(systemName: "arrow.clockwise"), style: .plain, target: self, action: #selector(onReloadTapped))
+        navigationItem.leftBarButtonItem = reloadButton
+    }
+    
+    @objc private func onAddTapped() {
+        items.append(generateRandomItem())
+        collectionView.reloadData()
+    }
+    
+    @objc private func onReloadTapped() {
+        items = []
+        for _ in 1...140 {
+            items.append(generateRandomItem())
         }
         collectionView.reloadData()
+    }
+    
+    private func generateRandomItem() -> Item {
+        let randomNumber = Int.random(in: 0..<Int.max)
+        let url = URL(string: "https://loremflickr.com/200/200?lock=\(randomNumber)")!
+        return Item(imageUrl: url)
+    }
+    
+    private func calculateItemWidth() -> CGFloat {
+        let totalSpacing = CGFloat(numberOfItemsInRow + 1) * itemSpacing
+        return (view.frame.width - totalSpacing) / CGFloat(numberOfItemsInRow)
+    }
+    
+    private func calculateItemHeight() -> CGFloat {
+        let totalSpacing = CGFloat(numberOfItemsInColumn - 1) * itemSpacing
+        let totalHeight = view.frame.height - view.safeAreaInsets.top - view.safeAreaInsets.bottom - totalSpacing
+        return totalHeight / CGFloat(numberOfItemsInColumn)
     }
 }
 
@@ -86,31 +123,5 @@ extension MainViewController: UICollectionViewDataSource {
         let item = items[indexPath.item]
         cell.item = item
         return cell
-    }
-}
-
-// MARK: - CollectionView Delegate
-
-extension MainViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAt indexPath: IndexPath
-    ) -> CGSize {
-        let width = calculateItemWidth()
-        let height = calculateItemHeight()
-        return .init(width: width, height: height)
-    }
-    
-    private func calculateItemWidth() -> CGFloat {
-        let totalSpacing = CGFloat(numberOfItemsInRow + 1) * itemSpacing
-        return (view.frame.width - totalSpacing) / CGFloat(numberOfItemsInRow)
-    }
-    
-    private func calculateItemHeight() -> CGFloat {
-        let totalSpacing = CGFloat(numberOfItemsInColumn) * itemSpacing
-        let totalHeight = view.frame.height - view.safeAreaInsets.top - view.safeAreaInsets.bottom - totalSpacing
-        return totalHeight / CGFloat(numberOfItemsInColumn)
     }
 }
