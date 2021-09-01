@@ -14,6 +14,7 @@ final class ImageCell: UICollectionViewCell {
     
     var item: Item! {
         didSet {
+            print("test")
             imageView.kf.setImage(with: item.imageUrl, options: [.processor(processor)])
         }
     }
